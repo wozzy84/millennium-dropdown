@@ -1,0 +1,213 @@
+:root {
+  --color-brand: #bd004f;
+  --color-text: #2e2e2e;
+  --color-text-muted: #737373;
+  --color-text-secondary: #8c9296;
+  --color-text-disabled: #a4a4a4;
+  --color-error: #f55050;
+  --color-border: #c1c1c1;
+  --color-border-light: #ededed;
+  --color-border-divider: #f0f0f0;
+  --color-border-inner: #e8e8e8;
+  --color-border-disabled: #e0e0e0;
+  --color-border-subtle: #d0d0d0;
+  --color-bg: #fff;
+  --color-bg-page: #f5f5f5;
+  --color-bg-hover: #fafafa;
+  --color-bg-disabled: #f9f9f9;
+  --font-base: "Roboto", Helvetica, Arial, sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 15px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-base);
+  background: var(--color-bg-page);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Header ─── */
+.appHeader {
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-light);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.appHeaderInner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.appLogo {
+  display: flex;
+  align-items: center;
+}
+
+.appTitle {
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ─── Main ─── */
+.appMain {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px 120px;
+}
+
+/* ─── Section ─── */
+.section {
+  background: var(--color-bg);
+  border-radius: var(--radius-lg);
+  padding: 28px 28px 32px;
+  margin-bottom: 24px;
+  border: 1px solid var(--color-border-light);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-divider);
+}
+
+.sectionDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* ─── Case grid ─── */
+.caseGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 40px;
+}
+
+@media (max-width: 600px) {
+  .caseGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.caseLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+
+/* ─── Flip demo ─── */
+.flipSpacer {
+  height: 340px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--color-bg-hover),
+    var(--color-bg-hover) 39px,
+    var(--color-border-divider) 39px,
+    var(--color-border-divider) 40px
+  );
+  border-radius: var(--radius-sm);
+}
+
+.flipAnchor {
+  max-width: 320px;
+  margin: 16px 0;
+}
+
+/* ─── A11y table ─── */
+.a11yTable {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.a11yRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--color-bg-page);
+}
+
+.a11yRow:last-child {
+  border-bottom: none;
+}
+
+/* ─── Demo helpers ─── */
+.demoForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demoFormWrapper {
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demoBtn {
+  align-self: flex-start;
+  padding: 8px 20px;
+  background: var(--color-brand);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+}
+
+.demoStateLabel {
+  margin-top: 8px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.demoResult {
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+}
+
+.demoSelectWrap {
+  max-width: 380px;
+  margin-top: 20px;
+}
+
+kbd {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 2px 6px;
+  background: var(--color-bg-page);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 3px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
