@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export interface SelectOption<V extends string = string> {
   value: V;
   label: string;
-  /** Dowolny ReactNode renderowany w liście i triggerze */
+  /** Custom content rendered in the list and the trigger. */
   content?: ReactNode;
   disabled?: boolean;
 }
@@ -32,6 +32,6 @@ export interface SelectProps<V extends string = string> {
   'aria-describedby'?: string;
 
   // --- Positioning ---
-  /** Maksymalna wysokość listy w px */
+  /** Maximum list height in px. */
   maxListHeight?: number;
 }

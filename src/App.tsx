@@ -4,6 +4,12 @@ import { PEOPLE, PEOPLE_RICH, COUNTRIES } from './data';
 import { Section, CaseGrid, Case } from './helpers';
 import './App.css';
 
+const HINT = (
+  <>
+    Standard hint message below the control with very{' '}
+    <a href="#">long text</a> that consists of a large number of various characters.
+  </>
+);
 
 export default function App() {
   const [country, setCountry] = useState<string | null>(null);
@@ -39,13 +45,6 @@ export default function App() {
     const data = new FormData(e.currentTarget);
     setFormWithNameResult(data.get('country') as string | null);
   }
-
-  const HINT = (
-    <>
-      Standard hint message below the control with very{' '}
-      <a href="#">long text</a> that consists of a large number of various characters.
-    </>
-  );
 
   return (
     <div className="appRoot">
@@ -182,8 +181,8 @@ export default function App() {
           </div>
         </Section>
 
-        {/* ── 6. Controlled vs Uncontrolled ── */}
-        <Section title="6. Controlled vs Uncontrolled">
+        {/* ── 5. Controlled vs Uncontrolled ── */}
+        <Section title="5. Controlled vs Uncontrolled">
           <CaseGrid>
             <Case label="Controlled — stan w rodzicu">
               <Select
@@ -214,8 +213,8 @@ export default function App() {
           </CaseGrid>
         </Section>
 
-        {/* ── 7. Form submission: with name vs without name ── */}
-        <Section title="7. Form submission — z name vs bez name">
+        {/* ── 6. Form submission: with name vs without name ── */}
+        <Section title="6. Form submission — z name vs bez name">
           <CaseGrid>
             <Case label="Z name — FormData odczytuje wartość automatycznie">
               <form onSubmit={handleFormWithNameSubmit} className="demoForm">
@@ -257,8 +256,8 @@ export default function App() {
           </CaseGrid>
         </Section>
 
-        {/* ── 8. Keyboard & a11y ── */}
-        <Section title="8. Nawigacja klawiaturą (WAI-ARIA Listbox)">
+        {/* ── 7. Keyboard & a11y ── */}
+        <Section title="7. Nawigacja klawiaturą (WAI-ARIA Listbox)">
           <div className="a11yTable">
             <div className="a11yRow"><kbd>↓</kbd> / <kbd>↑</kbd><span>Nawigacja po opcjach</span></div>
             <div className="a11yRow"><kbd>Enter</kbd> / <kbd>Space</kbd><span>Wybór zaznaczonej opcji / otwarcie listy</span></div>

@@ -6,7 +6,6 @@ import {
   useCallback,
   useImperativeHandle,
   forwardRef,
-  ReactNode,
 } from 'react';
 import { createPortal } from 'react-dom';
 import { SelectProps, SelectOption } from '../../types/select';
@@ -78,13 +77,6 @@ function Select<V extends string = string>(
     setIsOpen(false);
     setHighlightedIndex(-1);
   }, []);
-
-  // Scroll selected option into view when list opens
-  useEffect(() => {
-    if (!isOpen) return;
-    const selectedEl = listRef.current?.querySelector('[aria-selected="true"]');
-    selectedEl?.scrollIntoView({ block: 'nearest' });
-  }, [isOpen]);
 
   // Scroll highlighted option into view during keyboard navigation
   useEffect(() => {
@@ -163,50 +155,6 @@ function Select<V extends string = string>(
       .filter(Boolean)
       .join(' ') || undefined;
 
-  const renderListbox = (): ReactNode => {
-    if (!isOpen || !triggerRect) return null;
-
-    const style: React.CSSProperties = {
-      position: 'fixed',
-      left: triggerRect.left,
-      width: triggerRect.width,
-      maxHeight,
-      ...(placement === 'bottom'
-        ? { top: triggerRect.bottom - 1 }
-        : { bottom: window.innerHeight - triggerRect.top - 1 }),
-    };
-
-    return createPortal(
-      <ul
-        ref={listRef}
-        id={listboxId}
-        role="listbox"
-        aria-labelledby={labelId}
-        style={style}
-        className={cn(
-          styles.listbox,
-          placement === 'bottom' ? styles.listboxBottom : styles.listboxTop,
-        )}
-      >
-        {options.map((option) => {
-          const enabledIdx = enabledOptions.findIndex((o) => o.value === option.value);
-          return (
-            <SelectOptionItem
-              key={option.value}
-              option={option}
-              isSelected={option.value === selectedValue}
-              isHighlighted={enabledOptions[highlightedIndex]?.value === option.value}
-              optionId={`${listboxId}-option-${option.value}`}
-              onSelect={selectOption}
-              onHighlight={() => setHighlightedIndex(enabledIdx)}
-            />
-          );
-        })}
-      </ul>,
-      document.body,
-    );
-  };
-
   return (
     <div
       className={cn(
@@ -272,7 +220,43 @@ function Select<V extends string = string>(
         <span className={styles.chevron} aria-hidden="true" />
       </button>
 
-      {renderListbox()}
+      {isOpen && triggerRect && createPortal(
+        <ul
+          ref={listRef}
+          id={listboxId}
+          role="listbox"
+          aria-labelledby={labelId}
+          style={{
+            position: 'fixed',
+            left: triggerRect.left,
+            width: triggerRect.width,
+            maxHeight,
+            ...(placement === 'bottom'
+              ? { top: triggerRect.bottom - 1 }
+              : { bottom: window.innerHeight - triggerRect.top - 1 }),
+          }}
+          className={cn(
+            styles.listbox,
+            placement === 'bottom' ? styles.listboxBottom : styles.listboxTop,
+          )}
+        >
+          {options.map((option) => {
+            const enabledIdx = enabledOptions.findIndex((o) => o.value === option.value);
+            return (
+              <SelectOptionItem
+                key={option.value}
+                option={option}
+                isSelected={option.value === selectedValue}
+                isHighlighted={enabledOptions[highlightedIndex]?.value === option.value}
+                optionId={`${listboxId}-option-${option.value}`}
+                onSelect={selectOption}
+                onHighlight={() => setHighlightedIndex(enabledIdx)}
+              />
+            );
+          })}
+        </ul>,
+        document.body,
+      )}
 
       {error && (
         <div id={errorId} className={styles.errorMsg} role="alert">
